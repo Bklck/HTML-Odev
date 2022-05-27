@@ -1,0 +1,35 @@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+      <script type="text/javascript">
+      function getMapCoords(){
+        
+        if ( navigator.geolocation ){
+          
+          navigator.geolocation.getCurrentPosition(function(pos){
+            
+            var enlem = pos.coords.latitude,
+              boylam = pos.coords.longitude;
+            
+            
+            var haritaAyarlari = {
+              center: new google.maps.LatLng (enlem, boylam),
+              zoom: 15
+            };
+            document.getElementById("konum").style.display = 'block';
+            var harita = new google.maps.Map(document.getElementById("konum"), haritaAyarlari);
+            
+            /**
+             * Bulunduğumuz Yeri İşaretleyelim
+             */
+            var marker = new google.maps.Marker({
+              position: konum.getCenter(),
+              map: konum,
+              title: 'Sen Buradasın!'
+            });
+            
+          });
+    
+        } else {
+          alert('Tarayıcınız bu özelliği desteklemiyor.');
+        }
+        
+      }
